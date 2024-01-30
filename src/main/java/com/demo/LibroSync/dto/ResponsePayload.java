@@ -1,4 +1,4 @@
-package com.example.ContaGest.dto;
+package com.demo.LibroSync.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
