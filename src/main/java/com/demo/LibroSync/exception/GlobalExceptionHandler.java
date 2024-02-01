@@ -1,6 +1,7 @@
 package com.demo.LibroSync.exception;
 
 
+import com.demo.LibroSync.dto.ExceptionPayload;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
