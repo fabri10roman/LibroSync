@@ -12,5 +12,6 @@ public interface AuthorDao {
     Optional<Author> getById(Integer id);
     int deleteById(Integer id);
     int partialUpdate(Author author);
+    int update (Author author);
 
 }

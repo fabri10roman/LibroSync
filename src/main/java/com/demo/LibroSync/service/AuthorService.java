@@ -76,5 +76,18 @@ public class AuthorService {
                 .data(List.of(author))
                 .build();
     }
+    public ResponsePayload update (Integer id,Author author) {
+        if (authorDao.getById(id).isEmpty()) {
+            throw new EntityNotFoundException(String.format("Author with id %d not found", id));
+        }
+        int result = authorDao.update(author);
+        if (result == 1) {
+            return ResponsePayload.builder()
+                    .message("Author updated successfully")
+                    .data(List.of(author))
+                    .build();
+        }
+        throw new IllegalStateException(String.format("Failed to update author with id %d",author.getId()));
+    }
 
 }

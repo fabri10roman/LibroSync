@@ -33,6 +33,10 @@ public class AuthorController {
     public ResponsePayload partialUpdate(@RequestBody Author author, @PathVariable Integer id) {
         return authorService.partialUpdate(id,author);
     }
+    @PutMapping("/{id}")
+    public ResponsePayload update(@RequestBody Author author, @PathVariable Integer id) {
+        return authorService.update(id,author);
+    }
 
 
 
