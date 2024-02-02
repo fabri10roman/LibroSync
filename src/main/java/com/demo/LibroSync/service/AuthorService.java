@@ -17,7 +17,8 @@ public class AuthorService {
 
     public ResponsePayload create(Author author) {
         int result = authorDao.create(author);
-        if (result == 1) {
+        if (result != 0) {
+            author.setId(result);
             List<Object> data = List.of(author);
             return ResponsePayload.builder()
                     .message("Author created successfully")
