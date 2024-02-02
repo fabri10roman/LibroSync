@@ -5,6 +5,7 @@ import com.demo.LibroSync.domain.Author;
 import com.demo.LibroSync.dto.ResponsePayload;
 import com.demo.LibroSync.exception.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,6 +21,8 @@ public class AuthorService {
             List<Object> data = List.of(author);
             return ResponsePayload.builder()
                     .message("Author created successfully")
+                    .status(HttpStatus.CREATED.value())
+                    .title(HttpStatus.CREATED.getReasonPhrase())
                     .data(data)
                     .build();
         }
@@ -32,6 +35,8 @@ public class AuthorService {
         }
         return ResponsePayload.builder()
                 .message("Authors retrieved successfully")
+                .status(HttpStatus.OK.value())
+                .title(HttpStatus.OK.getReasonPhrase())
                 .data(List.of(authors))
                 .build();
     }
@@ -40,6 +45,8 @@ public class AuthorService {
                 .orElseThrow(() -> new EntityNotFoundException(String.format("Author with id %d not found", id)));
         return ResponsePayload.builder()
                 .message("Author retrieved successfully")
+                .status(HttpStatus.OK.value())
+                .title(HttpStatus.OK.getReasonPhrase())
                 .data(List.of(author))
                 .build();
     }
@@ -51,6 +58,8 @@ public class AuthorService {
         if (result == 1) {
             return ResponsePayload.builder()
                     .message("Author deleted successfully")
+                    .status(HttpStatus.OK.value())
+                    .title(HttpStatus.OK.getReasonPhrase())
                     .build();
         }
         throw new IllegalStateException(String.format("Failed to delete author with id %d", id));
@@ -73,6 +82,8 @@ public class AuthorService {
         }
         return ResponsePayload.builder()
                 .message("Author updated successfully")
+                .status(HttpStatus.OK.value())
+                .title(HttpStatus.OK.getReasonPhrase())
                 .data(List.of(author))
                 .build();
     }
@@ -84,6 +95,8 @@ public class AuthorService {
         if (result == 1) {
             return ResponsePayload.builder()
                     .message("Author updated successfully")
+                    .status(HttpStatus.OK.value())
+                    .title(HttpStatus.OK.getReasonPhrase())
                     .data(List.of(author))
                     .build();
         }
