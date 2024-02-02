@@ -29,6 +29,10 @@ public class AuthorController {
     public ResponsePayload deleteById(@PathVariable Integer id) {
         return authorService.deleteById(id);
     }
+    @PatchMapping("/{id}")
+    public ResponsePayload partialUpdate(@RequestBody Author author, @PathVariable Integer id) {
+        return authorService.partialUpdate(id,author);
+    }
 
 
 

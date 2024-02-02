@@ -55,9 +55,9 @@ public class AuthorService {
         }
         throw new IllegalStateException(String.format("Failed to delete author with id %d", id));
     }
-    public ResponsePayload update(Author authorDto) {
-        Author author = authorDao.getById(authorDto.getId())
-                .orElseThrow(() -> new EntityNotFoundException(String.format("Author with id %d not found", authorDto.getId())));
+    public ResponsePayload partialUpdate(Integer id,Author authorDto) {
+        Author author = authorDao.getById(id)
+                .orElseThrow(() -> new EntityNotFoundException(String.format("Author with id %d not found", id)));
         if (authorDto.getName() != null) {
             author.setName(authorDto.getName());
         }
@@ -67,9 +67,9 @@ public class AuthorService {
         if (authorDto.getCountry() != null) {
             author.setCountry(authorDto.getCountry());
         }
-        int result = authorDao.update(author);
+        int result = authorDao.partialUpdate(author);
         if (result != 1) {
-            throw new IllegalStateException(String.format("Failed to update author with id %d", authorDto.getId()));
+            throw new IllegalStateException(String.format("Failed to update author with id %d",id));
         }
         return ResponsePayload.builder()
                 .message("Author updated successfully")
