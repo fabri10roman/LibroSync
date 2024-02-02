@@ -24,5 +24,15 @@ public class AuthorService {
         }
         throw new IllegalStateException("Failed to create author");
     }
+    public ResponsePayload getAll() {
+        List<Author> authors = authorDao.getAll();
+        if (authors.isEmpty()) {
+            throw new EntityNotFoundException("No authors found");
+        }
+        return ResponsePayload.builder()
+                .message("Authors retrieved successfully")
+                .data(List.of(authors))
+                .build();
+    }
 
 }

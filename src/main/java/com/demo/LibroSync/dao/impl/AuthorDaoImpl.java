@@ -2,9 +2,12 @@ package com.demo.LibroSync.dao.impl;
 
 import com.demo.LibroSync.dao.AuthorDao;
 import com.demo.LibroSync.domain.Author;
+import com.demo.LibroSync.mapper.AuthorRowMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 
 @RequiredArgsConstructor
@@ -16,6 +19,12 @@ public class AuthorDaoImpl implements AuthorDao {
     public int create(Author author) {
         String sql = "INSERT INTO authors (name,age,country) VALUES (?,?,?)";
         return jdbcTemplate.update(sql, author.getName(), author.getAge(), author.getCountry());
+    }
+
+    @Override
+    public List<Author> getAll() {
+        String sql = "SELECT * FROM authors LIMIT 100";
+        return jdbcTemplate.query(sql, new AuthorRowMapper());
     }
 
 }

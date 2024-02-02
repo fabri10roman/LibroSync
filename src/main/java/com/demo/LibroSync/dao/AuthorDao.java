@@ -1,10 +1,12 @@
 package com.demo.LibroSync.dao;
 
 import com.demo.LibroSync.domain.Author;
-import com.demo.LibroSync.dto.ResponsePayload;
+
+import java.util.List;
 
 public interface AuthorDao {
 
     int create(Author author);
+    List<Author> getAll();
 
 }
