@@ -21,6 +21,10 @@ public class AuthorController {
     public ResponsePayload getAll() {
         return authorService.getAll();
     }
+    @GetMapping("/{id}")
+    public ResponsePayload getById(@PathVariable Integer id) {
+        return authorService.getById(id);
+    }
 
 
 
