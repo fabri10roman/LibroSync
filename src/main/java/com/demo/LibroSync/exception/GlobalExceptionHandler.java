@@ -2,6 +2,7 @@ package com.demo.LibroSync.exception;
 
 
 import com.demo.LibroSync.dto.ExceptionPayload;
+import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -26,5 +27,14 @@ public class GlobalExceptionHandler {
                 .title(HttpStatus.NOT_FOUND.getReasonPhrase())
                 .build();
         return new ResponseEntity<>(exceptionPayload, HttpStatus.NOT_FOUND);
+    }
+    @ExceptionHandler(DataAccessException.class)
+    public ResponseEntity<?> handleDataAccessException(DataAccessException e){
+        ExceptionPayload exceptionPayload = ExceptionPayload.builder()
+                .message(e.getMessage())
+                .status(HttpStatus.INTERNAL_SERVER_ERROR.value())
+                .title(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase())
+                .build();
+        return new ResponseEntity<>(exceptionPayload, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
