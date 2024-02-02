@@ -25,6 +25,10 @@ public class AuthorController {
     public ResponsePayload getById(@PathVariable Integer id) {
         return authorService.getById(id);
     }
+    @DeleteMapping("/{id}")
+    public ResponsePayload deleteById(@PathVariable Integer id) {
+        return authorService.deleteById(id);
+    }
 
 
 
