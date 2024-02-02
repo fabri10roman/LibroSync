@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @RequiredArgsConstructor
@@ -25,6 +26,13 @@ public class AuthorDaoImpl implements AuthorDao {
     public List<Author> getAll() {
         String sql = "SELECT * FROM authors LIMIT 100";
         return jdbcTemplate.query(sql, new AuthorRowMapper());
+    }
+
+    @Override
+    public Optional<Author> getById(Integer id) {
+        String sql = "SELECT * FROM authors WHERE id = ?";
+        List<Author> authors = jdbcTemplate.query(sql, new AuthorRowMapper(), id);
+        return authors.stream().findFirst();
     }
 
 }

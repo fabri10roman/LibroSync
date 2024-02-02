@@ -35,5 +35,13 @@ public class AuthorService {
                 .data(List.of(authors))
                 .build();
     }
+    public ResponsePayload getById(Integer id) {
+        Author author = authorDao.getById(id)
+                .orElseThrow(() -> new EntityNotFoundException(String.format("Author with id %d not found", id)));
+        return ResponsePayload.builder()
+                .message("Author retrieved successfully")
+                .data(List.of(author))
+                .build();
+    }
 
 }
