@@ -3,6 +3,7 @@ package com.demo.LibroSync.service;
 import com.demo.LibroSync.dao.AuthorDao;
 import com.demo.LibroSync.domain.Author;
 import com.demo.LibroSync.dto.ResponsePayload;
+import com.demo.LibroSync.exception.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
