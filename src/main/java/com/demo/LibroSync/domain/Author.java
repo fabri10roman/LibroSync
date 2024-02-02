@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @Data
 public class Author {
-    private String id;
+    private Integer id;
     private String name;
     private Integer age;
     private String country;
