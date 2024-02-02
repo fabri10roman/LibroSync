@@ -10,5 +10,6 @@ public interface AuthorDao {
     int create(Author author);
     List<Author> getAll();
     Optional<Author> getById(Integer id);
+    int deleteById(Integer id);
 
 }

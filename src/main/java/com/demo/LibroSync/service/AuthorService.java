@@ -43,5 +43,14 @@ public class AuthorService {
                 .data(List.of(author))
                 .build();
     }
+    public ResponsePayload deleteById(Integer id) {
+        int result = authorDao.deleteById(id);
+        if (result == 1) {
+            return ResponsePayload.builder()
+                    .message("Author deleted successfully")
+                    .build();
+        }
+        throw new EntityNotFoundException(String.format("Author with id %d not found", id));
+    }
 
 }

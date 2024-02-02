@@ -35,4 +35,10 @@ public class AuthorDaoImpl implements AuthorDao {
         return authors.stream().findFirst();
     }
 
+    @Override
+    public int deleteById(Integer id) {
+        String sql = "DELETE FROM authors WHERE id = ?";
+        return jdbcTemplate.update(sql, id);
+    }
+
 }
