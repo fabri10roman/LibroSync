@@ -92,6 +92,7 @@ public class AuthorService {
         if (authorDao.getById(id).isEmpty()) {
             throw new EntityNotFoundException(String.format("Author with id %d not found", id));
         }
+        author.setId(id);
         int result = authorDao.update(author);
         if (result == 1) {
             return ResponsePayload.builder()
