@@ -44,13 +44,37 @@ public class AuthorService {
                 .build();
     }
     public ResponsePayload deleteById(Integer id) {
+        if (authorDao.getById(id).isEmpty()) {
+            throw new EntityNotFoundException(String.format("Author with id %d not found", id));
+        }
         int result = authorDao.deleteById(id);
         if (result == 1) {
             return ResponsePayload.builder()
                     .message("Author deleted successfully")
                     .build();
         }
-        throw new EntityNotFoundException(String.format("Author with id %d not found", id));
+        throw new IllegalStateException(String.format("Failed to delete author with id %d", id));
+    }
+    public ResponsePayload update(Author authorDto) {
+        Author author = authorDao.getById(authorDto.getId())
+                .orElseThrow(() -> new EntityNotFoundException(String.format("Author with id %d not found", authorDto.getId())));
+        if (authorDto.getName() != null) {
+            author.setName(authorDto.getName());
+        }
+        if (authorDto.getAge() != null) {
+            author.setAge(authorDto.getAge());
+        }
+        if (authorDto.getCountry() != null) {
+            author.setCountry(authorDto.getCountry());
+        }
+        int result = authorDao.update(author);
+        if (result != 1) {
+            throw new IllegalStateException(String.format("Failed to update author with id %d", authorDto.getId()));
+        }
+        return ResponsePayload.builder()
+                .message("Author updated successfully")
+                .data(List.of(author))
+                .build();
     }
 
 }
