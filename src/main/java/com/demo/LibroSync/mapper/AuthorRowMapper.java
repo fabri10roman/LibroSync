@@ -10,7 +10,7 @@ public class AuthorRowMapper implements RowMapper<Author> {
     @Override
     public Author mapRow(ResultSet rs, int rowNum) throws SQLException {
         return Author.builder()
-                .id(rs.getString("id"))
+                .id(rs.getInt("id"))
                 .name(rs.getString("name"))
                 .age(rs.getInt("age"))
                 .country(rs.getString("country"))
