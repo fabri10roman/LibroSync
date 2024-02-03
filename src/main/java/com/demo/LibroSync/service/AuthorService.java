@@ -8,7 +8,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -105,4 +107,7 @@ public class AuthorService {
         throw new IllegalStateException(String.format("Failed to update author with id %d",author.getId()));
     }
 
+    public Optional<Author> getAuthorById(Integer authorId) {
+        return authorDao.getById(authorId);
+    }
 }
